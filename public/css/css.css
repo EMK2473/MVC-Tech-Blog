@@ -1,0 +1,27 @@
+/* dev css once operational */
+
+
+/* mediaQueries: */
+
+@media screen and (min-width: 768px) {
+    /* Base screens */
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Tablets in landscape mode */
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  /* Tablets in portrait mode */
+}
+@media screen and (max-width: 767px) {
+  /* Smartphones */
+}
+@media screen and (min-width: 1200px) {
+  /* Large desktop screens */
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
+  /* High-resolution displays */
+}
+@media (color-gamut: srgb) {
+  /* Screens with an sRGB color gamut */
+}
