@@ -5,7 +5,6 @@ const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const exphbs = require("express-handlebars");
 // research 
-
 // const hbs = exphbs.create({ helpers: require("./utils/helpers") });
 // const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // store: new SequelizeStore({ db: sequelize }),
@@ -17,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+app.use(routes);
 app.use(
   session({
     secret: process.env.SECRET,
@@ -35,4 +35,4 @@ const startServer = async () => {
     }
   };
 
-  startServer();
+startServer();
