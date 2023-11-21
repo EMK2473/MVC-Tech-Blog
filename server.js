@@ -4,11 +4,11 @@ const session = require("express-session");
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 
-
+// research 
 // const exphbs = require("express-handlebars");
 // const hbs = exphbs.create({ helpers: require("./utils/helpers") });
 // const SequelizeStore = require("connect-session-sequelize")(session.Store);
-
+// store: new SequelizeStore({ db: sequelize }),
 
 // middleware
 app.use(session(sess));
@@ -20,7 +20,6 @@ app.set("view engine", "handlebars");
 app.use(
   session({
     secret: process.env.SECRET,
-    store: new SequelizeStore({ db: sequelize }),
     resave: false,
     saveUninitialized: false,
   })
