@@ -1,9 +1,10 @@
 // Import the required modules
 const router = require("express").Router();
 const { Comment } = require("../../models");
-// import authorization, use with authorization
+// import authorization helper
+const authorization = require("../utils/authorizer");
 
-router.post("/", async (req, res) => {
+router.post("/", authorization, async (req, res) => { // needs to be logged in, so needs authentication
   try {    
     res.status(200).json(newComment);
   } catch (err) {

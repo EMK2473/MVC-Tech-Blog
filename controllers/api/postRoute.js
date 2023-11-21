@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
-// import authorization, use with authorization
+// import authorization helper
+const authorization = require("../utils/authorizer");
 
 router.get("/", async (req, res) => {
   try {
@@ -18,7 +19,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authorization, async (req, res) => { // needs to be logged in, so needs authentication
   try {
     res.status(200).json(newPost);
   } catch (err) {
@@ -26,7 +27,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authorization, async (req, res) => { // needs to be logged in, so needs authentication
   try {
     res.status(200).json(updatedPost);
   } catch (err) {
@@ -34,7 +35,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorization, async (req, res) => { // needs to be logged in, so needs authentication
   try {
     res.status(200).json(deletedPost);
   } catch (err) {
