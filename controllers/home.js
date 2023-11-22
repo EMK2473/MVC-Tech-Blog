@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
-// import authorization helper
-const authorization = require("../utils/authorizer");
+// import authorize helper
+const authorize = require("../utils/authorizer");
 
 router.get("/", async (req, res) => {
     try {
@@ -10,14 +10,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/post/:id", authorization, async (req, res) => { // needs to be logged in, so needs authentication
+router.get("/post/:id", authorize, async (req, res) => { // needs to be logged in, so needs authentication
     try {
     } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/dashboard", authorization, async (req, res) => { // needs to be logged in, so needs authentication
+router.get("/dashboard", authorize, async (req, res) => { // needs to be logged in, so needs authentication
     try {
     } catch (err) {
     res.status(500).json(err);
