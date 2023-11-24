@@ -12,6 +12,9 @@
     <div class="card-body">
         <h2 class="card-title"><a href="/post/{{id}}" class="text-decoration-none-text-reset">{{title}}</a></h2>
         <p class="card-text">Posted by: {{user.username}} | Date: {{format_date created_at}}</p>
+              <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
+      <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
     </div>
 </div>
+{{/each}}
 </main>
