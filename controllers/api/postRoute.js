@@ -38,7 +38,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //post new post req loggedIn
-router.post("/", authorize, async (req, res) => { // needs to be logged in, so needs authentication
+router.post("/", authorize, async (req, res) => { // needs to be logged in, 
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -51,7 +51,7 @@ router.post("/", authorize, async (req, res) => { // needs to be logged in, so n
 });
 
 // update/put post req loggedIn
-router.put("/:id", authorize, async (req, res) => { // needs to be logged in, so needs authentication
+router.put("/:id", authorize, async (req, res) => { // needs to be logged in, 
   try {
     const updatedPost = await Post.update(req.body, {
       where: { id: req.params.id },
@@ -66,7 +66,7 @@ router.put("/:id", authorize, async (req, res) => { // needs to be logged in, so
 });
 
 // delete post req loggedIn
-router.delete("/:id", authorize, async (req, res) => { // needs to be logged in, so needs authentication
+router.delete("/:id", authorize, async (req, res) => { // needs to be logged in, 
   try {
     await Comment.destroy({
       where: { post_id: req.params.id },

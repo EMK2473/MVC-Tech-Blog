@@ -4,7 +4,7 @@ const { Comment } = require("../../models");
 const authorize = require("../../utils/authorizer");
 
 // post new comment
-router.post("/", authorize, async (req, res) => { // needs to be logged in, so needs authentication
+router.post("/", authorize, async (req, res) => { // needs to be logged in -> authorize
   try {   
     const newComment = await Comment.create({
       ...req.body,
