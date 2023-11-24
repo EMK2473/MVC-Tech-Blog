@@ -21,6 +21,20 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", authorize, async (req, res) => {
   // needs to be logged in, so needs authentication
   try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        { model: User, attributes: ["username"] },
+        {
+          model: Comment,
+          include: [{ model: User, attributes: ["username"] }],
+        },
+      ],
+    });
+    const post = postData.get({ plain: true });
+    res.render("post", {
+      ...post,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -36,10 +50,11 @@ router.get("/dashboard", authorize, async (req, res) => {
 
 router.get("/login", async (req, res) => {
   // if logged in, redirect to /dashboard
-  try {
-  } catch (err) {
-    res.status(500).json(err);
+  if (req.session.logged_in) {
+    res.redirect("/dashboard");
+    return;
   }
+  res.render("login");
 });
 
 router.get("/newPost", async (req, res) => {
@@ -52,10 +67,11 @@ router.get("/newPost", async (req, res) => {
 
 router.get("/signup", async (req, res) => {
   // if logged in, redirect to /dashboard
-  try {
-  } catch (err) {
-    res.status(500).json(err);
+  if (req.session.logged_in) {
+    res.redirect("/dashboard");
+    return;
   }
+  res.render("signUp");
 });
 
 router.get("/editPost/:id", async (req, res) => {
