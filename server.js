@@ -4,11 +4,21 @@ const session = require("express-session");
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const exphbs = require("express-handlebars");
-// research
-// const hbs = exphbs.create({ helpers: require("./utils/helpers") });
-// const SequelizeStore = require("connect-session-sequelize")(session.Store);
-// store: new SequelizeStore({ db: sequelize }),
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const hbs = exphbs.create({ helpers: require("./utils/helper") });
+const app = express();
+const PORT = process.env.PORT || 3001;
 
+
+const sess = {
+  secret: "0ae9g7d6xj5l2c8wog8",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
 // middleware
 app.use(session(sess));
 app.use(express.json());

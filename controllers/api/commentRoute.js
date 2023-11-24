@@ -1,7 +1,6 @@
 // Import the required modules
 const router = require("express").Router();
 const { Comment } = require("../../models");
-// import authorize helper
 const authorize = require("../../utils/authorizer");
 
 // post new comment
