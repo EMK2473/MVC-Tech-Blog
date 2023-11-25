@@ -9,12 +9,10 @@
 <h1 class="mb-4">Tech Blogs:</h1>
 {{#each posts}}
 <div class="post-container post mb-3 card">
-    <div class="card-body">
-        <h2 class="card-title"><a href="/post/{{id}}" class="text-decoration-none-text-reset">{{title}}</a></h2>
-        <p class="card-text">Posted by: {{user.username}} | Date: {{format_date created_at}}</p>
-              <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
-      <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
-    </div>
+        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
+        <p>Posted by: {{user.username}} | Date: {{format_date created_at}}</p>
+        <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
+        <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
 </div>
 {{/each}}
 </main>
