@@ -30,6 +30,7 @@ app.use(routes);
 app.use(
   session({
     secret: process.env.SECRET,
+    store: new SequelizeStore({ db: sequelize }),
     resave: false,
     saveUninitialized: false,
   })

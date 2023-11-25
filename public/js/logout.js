@@ -1,5 +1,5 @@
 // dev JS functions for logging out
-const logout = async () =>{
+const logoutHandler = async () =>{
     const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,7 +11,7 @@ const logout = async () =>{
     }
 }
 
-const logoutButton = document.querySelector('#logout');
-if(logout){
-    logoutButton.addEventListener('click', logout)
+const logoutButton = document.querySelector('#logoutBTN');
+if(logoutButton){
+    logoutButton.addEventListener('click', logoutHandler)
 }
