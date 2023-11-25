@@ -22,10 +22,10 @@ router.post("/signup", async (req, res) => {
     newUser.username = req.body.username;
     newUser.email = req.body.email;
     newUser.password = req.body.password;
-    const userData = await newUser.save();
+    const userData = await newUser.save(); // save() Validates this instance, and if the validation passes, persists it to the database.
     req.session.save(() => {
       req.session.user_id = userData.id;
-      req.session.logged_in = true;
+      req.session.logged_in = true; // logs them in automatically 
       res.status(200).json(userData);
     });
   } catch (err) {

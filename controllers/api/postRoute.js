@@ -3,7 +3,7 @@ const { Post, User, Comment } = require("../../models");
 // import authorize helper
 const authorize = require("../../utils/authorizer");
 
-// get all posts from user using username
+// get all posts from user through username
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get post by :id
+// get post by :id through username/comment
 router.get("/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
