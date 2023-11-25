@@ -82,7 +82,7 @@ router.get("/signup", async (req, res) => {
     res.redirect("/dashboard");
     return;
   }
-  res.render("signUp");
+  res.render("signup");
 });
 
 router.get("/editPost/:id", async (req, res) => {

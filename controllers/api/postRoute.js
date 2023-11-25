@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
-// import authorize helper
 const authorize = require("../../utils/authorizer");
 
 // get all posts from user through username
+// findAll posts including User's username
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 // get post by :id through username/comment
+// finds post by PK, including User's username, and Comment's User's username
 router.get("/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -37,7 +38,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//post new post req loggedIn
+// post new post req loggedIn
+// creates new post w user_id on req.body.user_id
 router.post("/", authorize, async (req, res) => { // needs to be logged in, 
   try {
     const newPost = await Post.create({
@@ -51,6 +53,7 @@ router.post("/", authorize, async (req, res) => { // needs to be logged in,
 });
 
 // update/put post req loggedIn
+// updates post where id contains params.id
 router.put("/:id", authorize, async (req, res) => { // needs to be logged in, 
   try {
     const updatedPost = await Post.update(req.body, {
@@ -66,6 +69,7 @@ router.put("/:id", authorize, async (req, res) => { // needs to be logged in,
 });
 
 // delete post req loggedIn
+// deletes all comments where post_id contains params.id
 router.delete("/:id", authorize, async (req, res) => { // needs to be logged in, 
   try {
     await Comment.destroy({
@@ -77,7 +81,7 @@ router.delete("/:id", authorize, async (req, res) => { // needs to be logged in,
     });
 
     if (!deletedPost) {
-      res.status(404).json({ message: "No post found with that id!" });
+      res.status(404).json({ message: "No post found!" });
       return;
     }
     res.status(200).json(deletedPost);

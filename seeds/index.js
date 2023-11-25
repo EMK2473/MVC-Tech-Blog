@@ -8,9 +8,9 @@ const seedAll = async () => {
     await sequelize.sync({ force: true });
     console.log('\n~~~~~DATABASE~SYNCED~~~~~\n');
     await seedUsers();
-    console.log('\n~~~~~CATEGORIES~SEEDED~~~~~\n');
+    console.log('\n~~~~~CATEGORIES~SYNCED~~~~~\n');
     await seedPosts();
-    console.log('\n~~~~~PRODUCTS~SEEDED~~~~~\n');
+    console.log('\n~~~~~PRODUCTS~SYNCED~~~~~\n');
     await seedComments();
     process.exit(0);
   };
