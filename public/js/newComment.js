@@ -1,5 +1,6 @@
 // dev JS functions for posting a new Comment
 const newCommentFormHandler = async(event) =>{
+    event.preventDefault();
     const post_id = parseInt(window.location.pathname.split('/').pop());
     const content =  document.querySelector('#content-new-comment').value.trim();
 if(content){

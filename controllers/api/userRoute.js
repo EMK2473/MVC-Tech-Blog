@@ -6,7 +6,7 @@ const { User } = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const dbUserData = await User.findAll({
-      attributes: { exclude: ["password"] },
+      attributes: { exclude: ["password"] }, // for dev 
     });
     res.json(dbUserData);
   } catch (err) {
@@ -14,18 +14,6 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// synchronous?
-// router.get("/", (req, res) => {
-//   User.findAll({
-//     attributes: { exclude: ["password"] },
-//   })
-//     .then((dbUserData) => res.json(dbUserData))
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
 
 // sign up new user
 router.post("/signup", async (req, res) => {
@@ -37,7 +25,7 @@ router.post("/signup", async (req, res) => {
     const userData = await newUser.save(); // save() Validates this instance, and if the validation passes, persists it to the database.
     req.session.save(() => {
       req.session.user_id = userData.id;
-      req.session.logged_in = true; // logs them in automatically 
+      req.session.logged_in = true; // logs them in 
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -46,24 +34,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
-// // create new user
-// router.post('/', async (req, res) => {
-//   try {
-//     const dbUserData = await User.create({
-//       username: req.body.username,
-//       email: req.body.email,
-//       password: req.body.password,
-//     });
-//     req.session.save(() => {
-//       req.session.loggedIn = true;
-//       res.status(200).json(dbUserData);
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 // user login
 router.post('/login', async (req, res) => {
