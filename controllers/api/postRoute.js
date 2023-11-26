@@ -75,11 +75,9 @@ router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in,
     await Comment.destroy({
       where: { post_id: req.params.id },
     });
-
     const deletedPost = await Post.destroy({
       where: { id: req.params.id },
     });
-
     if (!deletedPost) {
       res.status(404).json({ message: "No post found!" });
       return;

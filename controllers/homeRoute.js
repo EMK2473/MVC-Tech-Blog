@@ -49,7 +49,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
     // Convert post data to plain JavaScript object
     const posts = postData.map((post) => post.get({ plain: true }));
-
     res.render("dashboard", {
       posts,
       logged_in: req.session.logged_in,
