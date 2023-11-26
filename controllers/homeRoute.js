@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
-// import authorize helper
-const authorize = require("../utils/authorizer");
+// import withAuth helper
+const withAuth = require("../utils/withAuth");
 
 router.get("/", async (req, res) => {
   try {
@@ -18,8 +18,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/post/:id", authorize, async (req, res) => {
-  // needs to be logged in, so needs authentication
+router.get("/post/:id", withAuth, async (req, res) => {
+  // needs to be logged in, 
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -40,7 +40,7 @@ router.get("/post/:id", authorize, async (req, res) => {
   }
 });
 
-router.get("/dashboard", authorize, async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   // needs to be logged in, so needs authentication
   try {
     const postData = await Post.findAll({

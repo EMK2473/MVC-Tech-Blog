@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
-const authorize = require("../../utils/authorizer");
+const withAuth = require("../../utils/withAuth");
 
 // get all posts from user through username
 // findAll posts including User's username
@@ -40,7 +40,7 @@ router.get("/:id", async (req, res) => {
 
 // post new post req loggedIn
 // creates new post w user_id on req.body.user_id
-router.post("/", authorize, async (req, res) => { // needs to be logged in, 
+router.post("/", withAuth, async (req, res) => { // needs to be logged in, 
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -54,7 +54,7 @@ router.post("/", authorize, async (req, res) => { // needs to be logged in,
 
 // update/put post req loggedIn
 // updates post where id contains params.id
-router.put("/:id", authorize, async (req, res) => { // needs to be logged in, 
+router.put("/:id", withAuth, async (req, res) => { // needs to be logged in, 
   try {
     const updatedPost = await Post.update(req.body, {
       where: { id: req.params.id },
@@ -70,7 +70,7 @@ router.put("/:id", authorize, async (req, res) => { // needs to be logged in,
 
 // delete post req loggedIn
 // deletes all comments where post_id contains params.id
-router.delete("/:id", authorize, async (req, res) => { // needs to be logged in, 
+router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in, 
   try {
     await Comment.destroy({
       where: { post_id: req.params.id },

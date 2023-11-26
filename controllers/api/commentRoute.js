@@ -1,11 +1,11 @@
 // Import the required modules
 const router = require("express").Router();
 const { Comment } = require("../../models");
-const authorize = require("../../utils/authorizer");
+const withAuth = require("../../utils/withAuth");
 
 // post new comment
 // creates new Comment by awaiting on the req.body, and the req.session.user_id to exists, then returns as json
-router.post("/", authorize, async (req, res) => { // needs to be logged in -> authorize
+router.post("/", withAuth, async (req, res) => { // needs to be logged in -> withAuth
   try {   
     const newComment = await Comment.create({
       ...req.body,
