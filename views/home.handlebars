@@ -5,12 +5,12 @@
       <div class="col-md-4">
         <div class="card mb-3">
           <div class="card-header bg-warning">
-            <h2 class="card-title">
+            <h2 class="card-title text-center">
               <a href="/post/{{id}}" class="text-dark">{{title}}</a>
             </h2>
           </div>
           <div class="card-body text-dark">
-            <p>Posted by: {{user.username}} Posted on: {{format_date createdAt}}</p>
+            <p>{{user.username}} posted on {{format_date createdAt}}</p>
           </div>
         </div>
       </div>

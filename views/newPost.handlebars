@@ -1,13 +1,13 @@
 <div class="container mt-5">
-  <h2 class="mb-4">Create a Blog</h2>
-  <form class="new-post-form">
+  <h2 class="mb-4">Your New Post:</h2>
+  <form id="new-post-form" class="new-post-form">
     <div class="mb-3">
       <label for="title-new-post" class="form-label">Title:</label>
       <input
         type="text"
         class="form-control"
         id="title-new-post"
-        placeholder="Enter a title here"
+        placeholder="Title required..."
       />
     </div>
     <div class="mb-3">
@@ -16,11 +16,11 @@
         class="form-control"
         id="content-new-post"
         rows="5"
-        placeholder="Enter content here"
+        placeholder="Content required..."
       ></textarea>
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary">Create Post</button>
+      <button type="submit" class="btn btn-success">Create Post <i class="bi bi-pencil-square"></i></button>
     </div>
   </form>
 </div>

@@ -1,18 +1,23 @@
 <main class="container mt-4">
 <div class="row">
-    <div class="col-12">
-        <h1 class="mb-4">{{user.username}} Dashboard</h1>
-        <a href="/newpost" class="btn btn-success">Post New Blog</a>
+    <div class="col-12 text-center">
+        {{#each posts}}
+        <h1 class="mb-4">{{user.username}}'s Dashboard</h1>
+        <br>
+        <br>
+        <a href="/newpost" class="btn btn-success">New Post <i class="bi bi-pencil-square"></i></a>
     </div>
+    {{/each}}
 </div>
 <br>
-<h1 class="mb-4">Tech Blogs:</h1>
+<br>
+<br>
+<h1 class="mb-4 ">Tech Blogs:</h1>
 {{#each posts}}
-<div class="post-container post mb-3 card">
-        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
-        <p>Posted by: {{user.username}} | Posted on: {{format_date created_at}}</p>
-        <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
-        <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
+<div class="post-container post mb-3 card text-center">
+        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset ">{{title}}</a></h2>
+        <p>{{user.username}} posted on {{format_date createdAt}}</p>
+        <a href="/editpost/{{id}}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit Post</a>
 </div>
 {{/each}}
 </main>
