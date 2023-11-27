@@ -6,7 +6,7 @@ const { User } = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const dbUserData = await User.findAll({
-      attributes: { exclude: ["password"] }, // for dev 
+      attributes: { exclude: ["password"] }, // hides hashed passwords 
     });
     res.json(dbUserData);
   } catch (err) {

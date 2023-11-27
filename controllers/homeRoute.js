@@ -67,12 +67,13 @@ router.get("/login", async (req, res) => {
   res.render("login");
 });
 
-router.get("/newPost", async (req, res) => {
+router.get("/newpost", async (req, res) => {
   // if logged in, render newPost
-  try {
-  } catch (err) {
-    res.status(500).json(err);
-  }
+if(req.session.logged_in){
+  res.render('newPost')
+}else{
+res.redirect('/')
+}
 });
 
 router.get("/signup", async (req, res) => {
@@ -80,13 +81,25 @@ router.get("/signup", async (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
-  }
+  } else{
   res.render("signup");
+  }
 });
 
 router.get("/editPost/:id", async (req, res) => {
   // render edit Post page (should be logged in to get access)
   try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        { model: User, attributes: ["username"]},
+        { model: Comment, include: [{model: User, attributes: ["username"]}]}
+      ]
+    })
+    const post = postData.get({ plain: true })
+    res.render('editPost', {
+      ...post,
+      logged_in: req.session.logged_in,
+    })
   } catch (err) {
     res.status(500).json(err);
   }
