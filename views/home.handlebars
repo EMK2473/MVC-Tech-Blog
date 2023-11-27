@@ -1,10 +1,16 @@
 <main class="container dashboard-background mt-5">
   <h1 class="mb-4 text-black">Tech Blog Posts</h1>
   <div class="row">
+    <div>
+    {{#if logged_in}} 
+    {{else}}
+    <h5 class="text-center">Login to view posts!</h5>
+    {{/if}}
+    </div>
     {{#each posts}}
       <div class="col-md-4">
         <div class="card mb-3">
-          <div class="card-header bg-info">
+          <div class="card-header">
             <h2 class="card-title text-center">
               <a href="/post/{{id}}" class="text-dark">{{title}}</a>
             </h2>
