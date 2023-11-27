@@ -1,14 +1,18 @@
 /* dev css once operational */
-.post-container {
-  transition: background-color 0.3s;
-}
-
-.post-container:hover {
-  border-right: 1em solid #656565;
-  background-color: rgba(126, 126, 126, 0.2);
+.card:hover {
+  border-bottom: 1em solid #074042;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 0.5em;
+  
 }
 
+.dashboard-background{
+  background-color: rgb(102, 103, 102);
+}
+
+.post-background{
+  background-color: rgb(255, 255, 255);
+}
 /* mediaQueries: */
 
 @media screen and (min-width: 768px) {
