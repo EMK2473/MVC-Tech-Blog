@@ -27,17 +27,14 @@
       <p><mark>{{user.username}} user_id:{{user_id}}</mark>:</p>
       <p><em>{{comment_text}}</em></p>
       <p class="text-end"><small>{{format_date createdAt}}</small></p>
-      
       {{#if (eq user_id ../user_id)}}
       {{!-- checks if the user_id of current comment being itterated over is equal to the parent context of user_id(the logged-in user) --}}
         <button type="button" class="btn btn-danger delete-comment" data-comment-id="{{comment_id}}">Delete Comment <i class="bi bi-trash-fill"></i></button>
       {{/if}}
-      
     </div>
   {{/each}}
 {{else}}
   <p class="text-end"><a href="/login">Login here</a> to delete</p>
 {{/if}}
-
 </main>
 

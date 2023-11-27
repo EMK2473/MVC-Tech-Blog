@@ -22,15 +22,16 @@ router.post("/", withAuth, async (req, res) => { // needs to be logged in -> wit
 
 router.get("/", async (req, res) => {
   try {
-    const comments = await Comment.findAll({ where: { user_id } });
+    const comments = await Comment.findAll();
     res.status(200).json(comments);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 router.get("/:id", async (req, res) => {
   try {
-    const commentData = await Comment.findByPk(req.params.id);
+    const commentData = await Comment.findByPk(req.params.id, { where: { user_id } });
     res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
