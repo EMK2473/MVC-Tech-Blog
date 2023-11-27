@@ -9,11 +9,17 @@ const hbs = exphbs.create({ helpers: require("./utils/helper") });
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const handlebarsHelpers = require('./utils/helper'); // Adjust the path accordingly
+const Handlebars = require('handlebars');
+// Register handlebars helpers
+Handlebars.registerHelper('eq', handlebarsHelpers.eq);
+
+
 
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 300000
+    maxAge: 3000000
   },
   resave: false,
   saveUninitialized: true,
@@ -26,7 +32,8 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.engine("handlebars", hbs.engine);
+// app.engine("handlebars", hbs.engine);
+app.engine('handlebars', exphbs({ helpers: handlebarsHelpers }));
 app.set("view engine", "handlebars");
 app.use(
   session({

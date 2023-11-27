@@ -19,21 +19,27 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/post/:id", withAuth, async (req, res) => {
-  // needs to be logged in, 
+  // needs to be logged in
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
-        { model: User, attributes: ["username"] },
+        { model: User, attributes: ["username", "id"] },
         {
           model: Comment,
-          include: [{ model: User, attributes: ["username"] }],
+          include: [{ model: User, attributes: ["username", "id"] }],
         },
       ],
     });
+    
     const post = postData.get({ plain: true });
     res.render("post", {
       ...post,
       logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
+      comments: post.comments.map(comment => ({ // have to pass and map the comments of the post to get and pass the comment.user.id to the 'get' route to be available for the hbars
+        ...comment,
+        user_id: comment.user.id
+      })),
     });
   } catch (err) {
     res.status(500).json(err);
