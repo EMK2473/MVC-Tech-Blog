@@ -1,13 +1,14 @@
 <main class="container mt-4">
 <div class="row">
     <div class="col-12 text-center">
-        {{#each posts}}
+        {{!-- to bring in user.username --}}
         <h1 class="mb-4">{{user.username}}'s Dashboard</h1>
         <br>
         <br>
-        <a href="/newpost" class="btn btn-success">New Post <i class="bi bi-pencil-square"></i></a>
     </div>
-    {{/each}}
+    <div class="text-center">
+    <a href="/newpost" class="btn btn-success text-center">New Post <i class="bi bi-pencil-square"></i></a>
+    </div>
 </div>
 <br>
 <br>
@@ -17,7 +18,7 @@
 <div class="post-container post mb-3 card text-center">
         <h2><a href="/post/{{id}}" class="text-decoration-none text-reset ">{{title}}</a></h2>
         <p>{{user.username}} posted on {{format_date createdAt}}</p>
-        <a href="/editpost/{{id}}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit Post</a>
+        <p><a href="/editpost/{{id}}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit Post</a></p>
 </div>
 {{/each}}
 </main>

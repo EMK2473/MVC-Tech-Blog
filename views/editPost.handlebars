@@ -7,7 +7,7 @@
         type="text"
         class="form-control"
         id="title-update-post"
-        placeholder="Enter post title"
+        placeholder="Enter a title"
         value="{{title}}"
       />
     </div>
@@ -17,10 +17,13 @@
         class="form-control"
         id="content-update-post"
         rows="3"
-        placeholder="Enter post content"
+        placeholder="Enter content"
       >{{content}}</textarea>
     </div>
+    <div class="mb-3 text-center">
     <button type="submit" id="update-post" class="btn btn-primary">Update Post <i class="bi bi-pencil-square"></i></button>
+    <a href="/dashboard" class="btn btn-warning">Cancel <i class="bi bi-exclamation-diamond"></i></a>
     <button type="button" id="delete-post" class="btn btn-danger">Delete Post <i class="bi bi-trash-fill"></i></button>
+  </div>
   </form>
 </main>
