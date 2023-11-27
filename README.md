@@ -32,7 +32,7 @@ Eric Keeton
 npm i npm run start
   
 ## Link to Video Instructions
-n/a
+https://mvc-tech-blogsite-2946fdd7cbfe.herokuapp.com/
   
 ## Screenshot
 ![screenshot of application](./public/assets/screenShot1.png)
