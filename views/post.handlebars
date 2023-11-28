@@ -2,7 +2,7 @@
   <article>
     <h1 class="text-center">{{title}}</h1>
     <p class="text-center">{{user.username}} posted on {{format_date createdAt}}</p>
-    <p>{{{content}}}</p>
+    <p style="white-space: pre-line;">{{{content}}}</p>
   </article>
   {{#if logged_in}}
     <form class="new-comment-form mb-3">
@@ -25,7 +25,7 @@
   {{#each comments}}
     <div class="comment mb-3">
       <p><mark>{{user.username}}</mark></p>
-      <p><em>{{comment_text}}</em></p>
+      <p style="white-space: pre-line;"><em>{{{comment_text}}}</em></p>
       <p class="text-end"><small>{{format_date createdAt}}</small></p>
       {{#if (eq user_id ../user_id)}}
       {{!-- checks if the user_id of current comment being itterated over is equal to the parent context of user_id(the logged-in user) --}}
