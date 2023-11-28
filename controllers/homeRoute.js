@@ -32,6 +32,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
     });
     
     const post = postData.get({ plain: true });
+    console.log(post)
     res.render("post", {
       ...post,
       logged_in: req.session.logged_in,
@@ -53,7 +54,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
       where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["username"] }],
     });
-    // Convert post data to plain JavaScript object
     const posts = postData.map((post) => post.get({ plain: true }));
     res.render("dashboard", {
       posts,
@@ -65,7 +65,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
 });
 
 router.get("/login", async (req, res) => {
-  // if logged in, redirect to /dashboard
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
@@ -74,7 +73,6 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/newpost", async (req, res) => {
-  // if logged in, render newPost
 if(req.session.logged_in){
   res.render('newPost')
 }else{
@@ -83,7 +81,6 @@ res.redirect('/')
 });
 
 router.get("/signup", async (req, res) => {
-  // if logged in, redirect to /dashboard
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
@@ -93,7 +90,7 @@ router.get("/signup", async (req, res) => {
 });
 
 router.get("/editPost/:id", async (req, res) => {
-  // render edit Post page (should be logged in to get access)
+  // render edit Post page withAuth
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
