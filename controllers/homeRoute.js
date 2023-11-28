@@ -3,6 +3,7 @@ const { Post, User, Comment } = require("../models");
 // import withAuth helper
 const withAuth = require("../utils/withAuth");
 
+// get all posts and render home view
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -18,8 +19,8 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get a post by id and render post view
 router.get("/post/:id", withAuth, async (req, res) => {
-  // needs to be logged in
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -30,14 +31,14 @@ router.get("/post/:id", withAuth, async (req, res) => {
         },
       ],
     });
-    
     const post = postData.get({ plain: true });
     console.log(post)
     res.render("post", {
       ...post,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
-      comments: post.comments.map(comment => ({ // have to pass and map the comments of the post to get and pass the comment.user.id to the 'get' route to be available for the hbars
+      comments: post.comments.map(comment => ({ 
+        // passing, and mapping, the comments of rendered post to the 'get route' as comment.user.id. This allows the 'get' route, for the delete button in post.hbars, to use the value of the comment's user_id as the reference for deletion as the route parameter.
         ...comment,
         user_id: comment.user.id
       })),
@@ -47,8 +48,8 @@ router.get("/post/:id", withAuth, async (req, res) => {
   }
 });
 
+// get all posts by user and render dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
-  // needs to be logged in, so needs authentication
   try {
     const postData = await Post.findAll({
       where: { user_id: req.session.user_id },
@@ -64,33 +65,8 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-router.get("/login", async (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/dashboard");
-    return;
-  }
-  res.render("login");
-});
-
-router.get("/newpost", async (req, res) => {
-if(req.session.logged_in){
-  res.render('newPost')
-}else{
-res.redirect('/')
-}
-});
-
-router.get("/signup", async (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/dashboard");
-    return;
-  } else{
-  res.render("signup");
-  }
-});
-
+// get post to edit and render edit post view
 router.get("/editPost/:id", async (req, res) => {
-  // render edit Post page withAuth
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -107,5 +83,21 @@ router.get("/editPost/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// get login view if not logged in, else redirect to dashboard
+router.get("/login", async (req, res) => {
+  req.session.logged_in ? res.redirect("/dashboard") : res.render("login");
+});
+
+// get new post view if logged in, else redirect to home
+router.get("/newpost", async (req, res) => {
+  req.session.logged_in ? res.render('newPost') : res.redirect('/');
+});
+
+// get sign up view if not logged in, else redirect to dashboard
+router.get("/signup", async (req, res) => {
+  req.session.logged_in ? res.redirect("/dashboard") : res.render("signup");
+});
+
 
 module.exports = router;

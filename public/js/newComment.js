@@ -1,7 +1,9 @@
-// dev JS functions for posting a new Comment
 const newCommentFormHandler = async(event) =>{
     event.preventDefault();
     const post_id = parseInt(window.location.pathname.split('/').pop());
+    // parseInt() to convert the last segment of url to an integer
+    // .split('/') to create an array of path segments
+    // .pop() to retrieve the last element of that array
     const content =  document.querySelector('#content-new-comment').value.trim();
 if(content){
     const response = await fetch(`/api/comments`, {
@@ -19,7 +21,7 @@ if(content){
 }
 }
 
-// event listener
+
 const newCommentForm = document.querySelector('.new-comment-form');
 if(newCommentForm){
     newCommentForm.addEventListener('submit', newCommentFormHandler)

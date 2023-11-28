@@ -1,4 +1,3 @@
-// dev JS functions for deleting a post
 const deletePost =  async (event) => {
     const response = await fetch(`/api/posts/${post.id}`, {
         method: "DELETE",

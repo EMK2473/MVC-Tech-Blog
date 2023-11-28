@@ -1,4 +1,3 @@
-// dev JS functions for logging out
 const logoutHandler = async () =>{
     const response = await fetch('/api/users/logout', {
         method: 'POST',

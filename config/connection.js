@@ -1,3 +1,4 @@
+// set up a Sequelize connection to a MySQL database
 const Sequelize = require('sequelize');
 require('dotenv').config(); 
 const sequelize = process.env.JAWSDB_URL 

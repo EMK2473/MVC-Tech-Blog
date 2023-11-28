@@ -1,7 +1,7 @@
-// dev JS functions for editing a post
-const post_id = window.location.toString().split('/')[
-    window.location.toString().split("/").length - 1
-]; // get post_id from endpoint by subtracting one from index
+const post_id = parseInt(window.location.pathname.split('/').pop());
+// parseInt() to convert the last segment of url to an integer
+// .split('/') to create an array of path segments
+// .pop() to retrieve the last element of that array
 
 // update Post Form Handler
 const updatePostFormHandler = async (event) =>{

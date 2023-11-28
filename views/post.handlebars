@@ -2,7 +2,7 @@
   <article>
     <h1 class="text-center">{{title}}</h1>
     <p class="text-center">{{user.username}} posted on {{format_date createdAt}}</p>
-    <p>{{content}}</p>
+    <p>{{{content}}}</p>
   </article>
   {{#if logged_in}}
     <form class="new-comment-form mb-3">
@@ -29,7 +29,7 @@
       <p class="text-end"><small>{{format_date createdAt}}</small></p>
       {{#if (eq user_id ../user_id)}}
       {{!-- checks if the user_id of current comment being itterated over is equal to the parent context of user_id(the logged-in user) --}}
-        <button type="button" class="btn btn-danger delete-comment" data-comment-id="{{id}}">Delete Comment <i class="bi bi-trash-fill"></i></button>
+        <button type="button" class="btn btn-danger btn-sm delete-comment" data-comment-id="{{id}}">Delete <i class="bi bi-trash-fill"></i></button>
       {{/if}}
     </div>
   {{/each}}

@@ -7,8 +7,8 @@ const postData = [
     user_id: 1,
   },
   {
-    title: "We need mods, too many bad joke posts",
-    content: "Title explains everything... I remember when this site was cool. edit: No, I won't volunteer.",
+    title: "What is model-view-controller (MVC)?",
+    content: "In programming, model-view-controller (MVC) is an architectural design pattern that organizes an application's logic into distinct layers, each of which carries out a specific set of tasks. The layers also interact with each other to ensure that the application's functionality is delivered in a coordinated and consistent manner. The MVC methodology incorporates the entire application, from the user interface (UI) to the underlying data model.",
     user_id: 2,
   },
 ];

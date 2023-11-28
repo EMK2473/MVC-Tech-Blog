@@ -1,4 +1,4 @@
-//imports
+// importing packages and dependencies
 const express = require("express");
 const session = require("express-session");
 const routes = require("./controllers");
@@ -8,14 +8,12 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const hbs = exphbs.create({ helpers: require("./utils/helper") });
 const app = express();
 const PORT = process.env.PORT || 3001;
-
-const handlebarsHelpers = require('./utils/helper'); // Adjust the path accordingly
+const handlebarsHelpers = require('./utils/helper'); 
 const Handlebars = require('handlebars');
-// Register handlebars helpers
 Handlebars.registerHelper('eq', handlebarsHelpers.eq);
 
 
-
+// sess object
 const sess = {
   secret: process.env.SECRET,
   cookie: {
@@ -27,12 +25,12 @@ const sess = {
     db: sequelize,
   }),
 };
+
 // middleware
 app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// app.engine("handlebars", hbs.engine);
 app.engine('handlebars', exphbs({ helpers: handlebarsHelpers }));
 app.set("view engine", "handlebars");
 app.use(

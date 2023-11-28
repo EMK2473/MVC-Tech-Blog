@@ -1,11 +1,19 @@
-// Import the required modules
 const router = require("express").Router();
 const { Comment, User } = require("../../models");
 const withAuth = require("../../utils/withAuth");
 
+// get all comments
+router.get("/", async (req, res) => {
+  try {
+    const comments = await Comment.findAll();
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // post new comment
-// creates new Comment by awaiting on the req.body, and the req.session.user_id to exists, then returns as json
-router.post("/", withAuth, async (req, res) => { // needs to be logged in -> withAuth
+router.post("/", withAuth, async (req, res) => { 
   try {   
     const newComment = await Comment.create({
       ...req.body,
@@ -17,18 +25,7 @@ router.post("/", withAuth, async (req, res) => { // needs to be logged in -> wit
   }
 });
 
-
-
-
-router.get("/", async (req, res) => {
-  try {
-    const comments = await Comment.findAll();
-    res.status(200).json(comments);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
+// get comment by id
 router.get("/:id", async (req, res) => {
   try {
     const commentData = await Comment.findByPk(req.params.id, {
@@ -41,9 +38,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//todo:
-// if logged in, delete button pops up for delete comment
-router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in -> withAuth
+// delete comment by id
+router.delete("/:id", withAuth, async (req, res) => { 
   try {
     console.log('Deleting comment with ID:', req.params.id);
     const deletedComment = await Comment.destroy({
@@ -59,4 +55,5 @@ router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in -
     res.status(500).json(err);
   }
 });
+
 module.exports = router;

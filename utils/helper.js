@@ -1,5 +1,3 @@
-const Handlebars = require('handlebars');
-
 module.exports = {
   eq: function (a,b) {
     return a===b

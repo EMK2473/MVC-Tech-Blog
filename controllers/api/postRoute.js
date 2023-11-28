@@ -2,8 +2,7 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const withAuth = require("../../utils/withAuth");
 
-// get all posts from user through username
-// findAll posts including User's username
+// get all posts
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -15,8 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get post by :id through username/comment
-// finds post by PK, including User's username, and Comment's User's username
+// get post by :id 
 router.get("/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -38,9 +36,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// post new post req loggedIn
-// creates new post w user_id on req.body.user_id
-router.post("/", withAuth, async (req, res) => { // needs to be logged in, 
+// post new post 
+router.post("/", withAuth, async (req, res) => { 
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -52,9 +49,8 @@ router.post("/", withAuth, async (req, res) => { // needs to be logged in,
   }
 });
 
-// update/put post req loggedIn
-// updates post where id contains params.id
-router.put("/:id", withAuth, async (req, res) => { // needs to be logged in, 
+// update/put post 
+router.put("/:id", withAuth, async (req, res) => {  
   try {
     const updatedPost = await Post.update(req.body, {
       where: { id: req.params.id },
@@ -68,9 +64,8 @@ router.put("/:id", withAuth, async (req, res) => { // needs to be logged in,
   }
 });
 
-// delete post req loggedIn
-// deletes all comments where post_id contains params.id
-router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in, 
+// delete post 
+router.delete("/:id", withAuth, async (req, res) => {  
   try {
     await Comment.destroy({
       where: { post_id: req.params.id },
