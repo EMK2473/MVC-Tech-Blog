@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
-// import withAuth helper
 const withAuth = require("../utils/withAuth");
 
 // get all posts and render home view
