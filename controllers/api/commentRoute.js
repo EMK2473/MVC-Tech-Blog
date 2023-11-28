@@ -45,6 +45,7 @@ router.get("/:id", async (req, res) => {
 // if logged in, delete button pops up for delete comment
 router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in -> withAuth
   try {
+    console.log('Deleting comment with ID:', req.params.id);
     const deletedComment = await Comment.destroy({
       where: { id: req.params.id },
     });
@@ -54,6 +55,7 @@ router.delete("/:id", withAuth, async (req, res) => { // needs to be logged in -
     }
     res.status(200).json(deletedComment);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

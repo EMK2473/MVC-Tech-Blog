@@ -5,7 +5,7 @@
     <p>{{content}}</p>
   </article>
   {{#if logged_in}}
-    <form class="new-comment-form" class="mb-3">
+    <form class="new-comment-form mb-3">
       <div class="mb-3">
         <label for="comment" class="form-label">Add Comment:</label>
         <textarea
@@ -24,7 +24,7 @@
 {{#if logged_in}}
   {{#each comments}}
     <div class="comment mb-3">
-      <p><mark>{{user.username}} user_id:{{user_id}}</mark>:</p>
+      <p><mark>{{user.username}}</mark></p>
       <p><em>{{comment_text}}</em></p>
       <p class="text-end"><small>{{format_date createdAt}}</small></p>
       {{#if (eq user_id ../user_id)}}
