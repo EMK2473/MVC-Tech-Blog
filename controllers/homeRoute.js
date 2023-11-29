@@ -50,7 +50,6 @@ router.get("/post/:id", withAuth, async (req, res) => {
 // get all posts by user and render dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
       console.log('Dashboard route:', req.session.logged_in);
-
   try {
     const postData = await Post.findAll({
       where: { user_id: req.session.user_id },
@@ -65,6 +64,45 @@ router.get("/dashboard", withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get("/profile", withAuth, async (req, res) => {
+  try {
+    // Retrieve the logged-in user's ID from the session
+    const userId = req.session.user_id;
+    console.log('User ID:', userId);
+
+    // Redirect to the user's profile page with their ID
+    res.redirect(`/profile/${userId}`);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get user profile 
+router.get("/profile/:id", withAuth, async (req, res) => {
+  console.log('profile route:', req.session.logged_in);
+try {
+  const profileData = await User.findByPk(req.session.user_id, {
+    attributes: ["username", "email", "id"],
+  });
+if(!profileData) {
+  res.status(404).json({ message: "Profile not found!"})
+  return
+}
+console.log('User Profile:', profileData.get({ plain: true }));
+
+const profile = profileData.get({ plain: true })
+console.log('User variable:', profile);
+
+res.render("profile", {
+  profile,
+  logged_in: req.session.logged_in,
+  username: req.session.user.username,
+});
+} catch (err) {
+res.status(500).json(err);
+}
 });
 
 // get post to edit and render edit post view

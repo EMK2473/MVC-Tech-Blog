@@ -34,7 +34,53 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// delete user by id (for insomnia)
+// update/put user by id
+router.put("/:id", async (req, res) => {
+  try {
+      console.log("Update request received:", req.body);
+      
+      // Correctly declare and initialize userId
+      const userId = parseInt(req.params.id.trim(), 10);
+      console.log("User ID:", userId);
+
+      // Find the user by ID
+      const userToUpdate = await User.findByPk(userId);
+
+      if (!userToUpdate) {
+          console.log("No user found!");
+          res.status(404).json({ message: "No user found!" });
+          return;
+      }
+
+      // Update the user
+      const updatedUser = await User.update(
+          {
+              username: req.body.username,
+              email: req.body.email,
+          },
+          {
+              where: { id: userId },
+          }
+      );
+
+
+
+      if (updatedUser[0] === 0) {
+          res.status(404).json({ message: "No user found!" });
+          return;
+      }
+
+      const updatedUserData = await User.findByPk(req.params.id);
+      res.status(200).json(updatedUserData);
+  } catch (err) {
+      console.error("Update failed:", err);
+      res.status(500).json(err);
+  }
+});
+
+
+
+// delete user by id 
 router.delete("/:id", async (req, res) => {  
   try {
     const deletedUser = await User.destroy({

@@ -1,0 +1,24 @@
+<main class="container mt-4">
+    <h1 class="mb-4">Edit Your Profile: {{username}}</h1>
+    <form id="edit-profile-form" class="edit-profile-form">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="username"
+                value="{{username}}"
+            />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                value="{{profile.email}}"
+            />
+        </div>
+        <button type="submit" id="update-profile" class="btn btn-sm btn-primary">Update Profile <i class="bi bi-pencil-square"></i></button>
+    </form>
+</main>
