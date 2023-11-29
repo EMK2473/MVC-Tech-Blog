@@ -49,6 +49,8 @@ router.get("/post/:id", withAuth, async (req, res) => {
 
 // get all posts by user and render dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
+      console.log('Dashboard route:', req.session.logged_in);
+
   try {
     const postData = await Post.findAll({
       where: { user_id: req.session.user_id },
@@ -58,6 +60,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
     res.render("dashboard", {
       posts,
       logged_in: req.session.logged_in,
+      username: req.session.user.username,
     });
   } catch (err) {
     res.status(500).json(err);

@@ -9,6 +9,7 @@ const hbs = exphbs.create({ helpers: require("./utils/helper") });
 const app = express();
 const PORT = process.env.PORT || 3001;
 const handlebarsHelpers = require('./utils/helper'); 
+const jsonHelper = require('./utils/helper').json; // Add this line
 const Handlebars = require('handlebars');
 Handlebars.registerHelper('eq', handlebarsHelpers.eq);
 
@@ -31,7 +32,7 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.engine('handlebars', exphbs({ helpers: handlebarsHelpers }));
+app.engine('handlebars', exphbs({ helpers: { ...handlebarsHelpers, json: jsonHelper } }));
 app.set("view engine", "handlebars");
 app.use(
   session({
