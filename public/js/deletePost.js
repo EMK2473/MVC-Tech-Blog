@@ -1,4 +1,4 @@
-const deletePost =  async (event) => {
+const deletePost =  async (post) => {
     const response = await fetch(`/api/posts/${post.id}`, {
         method: "DELETE",
         headers: {"Content-Type": "application/json" },

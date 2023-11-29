@@ -15,7 +15,6 @@
 <br>
 <br>
 <div class="dashboard-background">
-<h1 class="mb-4">Your Tech Blogs:</h1>
   <div class="row">
     {{#each posts}}
       <div class="col-md-6 text-center">
@@ -32,6 +31,11 @@
         </div>
       </div>
     {{/each}}
+    {{#if (eq posts.length 0)}}
+    <p class="text-center">Your posts here:</p>
+    <br>
+    <br>
+    {{/if}}
   </div>
   </div>
 </main>
